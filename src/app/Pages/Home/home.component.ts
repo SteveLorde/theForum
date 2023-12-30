@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Category} from "../../Data/Models/Category";
-import {ThreadsDataServiceService} from "../../Services/ThreadsData/threads-data-service.service";
+import {ThreadsDataService} from "../../Services/ThreadsData/threads-data.service";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent {
 
   categories : Category[] = []
 
-  constructor(private dataservice : ThreadsDataServiceService) {
+  constructor(private dataservice : ThreadsDataService) {
 
   }
 

@@ -1,22 +1,30 @@
 import { Component } from '@angular/core';
 import {Thread} from "../../Data/Models/Thread";
+import {NgForOf} from "@angular/common";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-subcategory-page',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './subcategory-page.component.html',
   styleUrl: './subcategory-page.component.scss'
 })
 export class SubcategoryPageComponent {
 
-  subcategorythreads : Thread[] = []
+  threads : Thread[] = []
 
-  constructor() {
+  constructor(private router : Router, private route : Route) {
   }
 
   async GetThreads() {
 
+  }
+
+  NavigateToThread(id : string) {
+    this.router.navigate(['/thread', id])
   }
 
 }

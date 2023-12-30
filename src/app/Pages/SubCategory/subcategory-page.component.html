@@ -3,4 +3,18 @@
 
 <div>
 
+  <div (click)="NavigateToThread(thread.id)" *ngFor="let thread of threads">
+    <div>
+      <p>{{thread.title}}</p>
+      <p>{{thread.date}}</p>
+    </div>
+    <div>
+      <p>{{thread.numofposts}}</p>
+      <div>
+        <p>latest post at</p>
+        <img src="" />
+      </div>
+    </div>
+  </div>
+
 </div>

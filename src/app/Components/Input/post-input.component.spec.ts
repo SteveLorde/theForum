@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryPageComponent } from './category-page.component';
+import { PostInputComponent } from './post-input.component';
 
-describe('CategoryPageComponent', () => {
-  let component: CategoryPageComponent;
-  let fixture: ComponentFixture<CategoryPageComponent>;
+describe('PostInputComponent', () => {
+  let component: PostInputComponent;
+  let fixture: ComponentFixture<PostInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryPageComponent]
+      imports: [PostInputComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CategoryPageComponent);
+    fixture = TestBed.createComponent(PostInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

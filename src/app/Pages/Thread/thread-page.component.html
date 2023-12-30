@@ -1,1 +1,25 @@
 <p>thread-page works!</p>
+
+<div>
+
+  <div *ngFor="let post of thread.posts">
+    <div class="postmain">
+      <div class="postuserinfo">
+
+      </div>
+      <div class="postbody">
+        <p>{{post.body}}</p>
+      </div>
+    </div>
+    <div class="postfooter">
+      <p>posted {{post.date}}</p>
+    </div>
+
+    <app-post-input />
+
+
+  </div>
+
+
+
+</div>
