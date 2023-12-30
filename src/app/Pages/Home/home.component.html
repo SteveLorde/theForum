@@ -1,1 +1,13 @@
 <p>home works!</p>
+
+<div >
+  <div *ngFor="let category of categories">
+    <h2>{{category.name}}</h2>
+    <div class="categorycard">
+      <div *ngFor="let subcategory of category.subcategories">
+        <p >{{subcategory.name}}</p>
+        <p>{{subcategory.numofthreads}}</p>
+      </div>
+    </div>
+  </div>
+</div>

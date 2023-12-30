@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, Observer} from "rxjs";
-import {Thread} from "../../Data/Thread";
+import {Thread} from "../../Data/Models/Thread";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,11 @@ export class ThreadsDataServiceService {
 
   GetCategoryThreads(){
     let response = this.http.get<Thread[]>("")
+    return response
+  }
+
+  GetCategories(){
+    let response = this.http.get("", {responseType: "json"})
     return response
   }
 
