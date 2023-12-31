@@ -16,7 +16,7 @@ export class SubcategoryPageComponent {
 
   threads : Thread[] = []
 
-  constructor(private router : Router, private route : Route) {
+  constructor(private router : Router) {
   }
 
   async GetThreads() {

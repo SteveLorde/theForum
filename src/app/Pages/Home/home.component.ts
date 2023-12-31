@@ -23,8 +23,8 @@ export class HomeComponent {
 
 
 
-  async GetCategories() {
-    let response = this.dataservice.GetCategories()
+  GetCategories() {
+    let response = this.dataservice.GetCategories().subscribe()
   }
 
 }

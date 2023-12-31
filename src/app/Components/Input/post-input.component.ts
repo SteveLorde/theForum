@@ -1,5 +1,4 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import '@github/markdown-toolbar-element'
 
 @Component({
   selector: 'app-post-input',

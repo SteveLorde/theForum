@@ -2,7 +2,7 @@
 
   <div class="formsection">
     <button class="formselection" (click)="SwitchForm()">Go {{status}}</button>
-    <form class="form" *ngIf="Loginform" [formGroup]="loginform" (ngSubmit)="LoginTest()">
+    <form class="form" *ngIf="Loginform" [formGroup]="loginform" (ngSubmit)="Login()">
       <p class="testheader">this is currently for testing, input any credentials to Login</p>
       <h3 class="username">Username</h3>
       <input class="forminput"  type="text" placeholder="Enter Username" />

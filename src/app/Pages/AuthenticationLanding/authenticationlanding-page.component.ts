@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 import {RegisterRequest} from "../../Services/Authentication/DTO/RegisterRequest";
 
@@ -20,18 +20,18 @@ export class AuthenticationlandingPageComponent {
   public Registerform : boolean = false
   public status : string = "Register"
 
-  constructor(private authservice : AuthenticationService, private router : Router) {
+  constructor(private authservice : AuthenticationService, private router : Router, private fb : FormBuilder) {
   }
 
   loginform = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required),
   })
 
-  registerform = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    email: new FormControl('')
+  registerform = this.fb.nonNullable.group({
+    username: [""],
+    password: [""],
+    email: [""]
   })
 
   SwitchForm() {
@@ -67,18 +67,20 @@ export class AuthenticationlandingPageComponent {
      */
   }
 
-   LoginTest() {
-
-  }
-
    Register() {
-    let registerrequest : RegisterRequest
-     {
-       registerrequest.username = this.registerform.get('username')
-       registerrequest.password = this.registerform.get('password')
-       registerrequest.email = this.registerform.get('email')
+      let registerreq : RegisterRequest = {} as RegisterRequest
+     if (this.registerform.value.username && this.registerform.value.password && this.registerform.value.email !== undefined) {
+       registerreq.username = this.registerform.value.username
+       registerreq.password = this.registerform.value.password
+       registerreq.email = this.registerform.value.email
+       let check = this.authservice.Register(registerreq)
+       if (check) {
+         this.router.navigate(['/profile'])
+       }
      }
-
+     else {
+       //return pop up
+     }
   }
 
 }

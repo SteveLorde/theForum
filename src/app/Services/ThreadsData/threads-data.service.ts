@@ -11,9 +11,11 @@ export class ThreadsDataService {
 
 
   backendurl = environment.backendurl
-  backendimageurl = environment.backendurl + 'Storage'
+  backendimageurl = environment.backendurl + '/Storage'
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+
+  }
 
 
 
