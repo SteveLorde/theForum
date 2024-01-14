@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Category} from "../../Data/Models/Category";
-import {ThreadsDataService} from "../../Services/ThreadsData/threads-data.service";
+import {DataService} from "../../Services/DataService/data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,19 +13,27 @@ import {ThreadsDataService} from "../../Services/ThreadsData/threads-data.servic
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   categories : Category[] = []
 
-  constructor(private dataservice : ThreadsDataService) {
+  constructor(private dataservice : DataService, private router : Router) {
 
   }
 
-
+  ngOnInit() {
+    this.GetCategories()
+  }
 
 
   GetCategories() {
-    let response = this.dataservice.GetCategories().subscribe()
+    this.dataservice.GetCategories().subscribe( (res : Category[]) =>
+      this.categories = res
+    )
   }
+
+  NavigateToSubCategory(subcategoryid : string) {
+    this.router.navigate(["/subcategory", subcategoryid])
+}
 
 }

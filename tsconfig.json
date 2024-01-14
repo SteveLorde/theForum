@@ -5,6 +5,7 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -20,6 +21,7 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
+      "ES2018",
       "dom"
     ]
   },

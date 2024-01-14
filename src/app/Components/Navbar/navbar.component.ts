@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
+import {NotificationsService} from "../../Services/Notifications/notifications.service";
+import {sign} from "node:crypto";
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +11,19 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  authstatus : string = "Login/Register"
+  authstatus : string = "Login"
+  numofmessages = signal(0)
+  messages : MessageEvent[] = []
+
+  constructor(private notifservice : NotificationsService) {
+
+  }
 
   ngOnInit() {
 
   }
+
+
 
 
 }

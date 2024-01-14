@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ThreadsDataService } from './threads-data.service';
+import { NotificationsService } from './notifications.service';
 
-describe('ThreadsDataServiceService', () => {
-  let service: ThreadsDataService;
+describe('NotificationsService', () => {
+  let service: NotificationsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ThreadsDataService);
+    service = TestBed.inject(NotificationsService);
   });
 
   it('should be created', () => {

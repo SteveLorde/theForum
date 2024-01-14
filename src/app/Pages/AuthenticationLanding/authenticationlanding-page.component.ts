@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 import {RegisterRequest} from "../../Services/Authentication/DTO/RegisterRequest";
+import {LoginRequest} from "../../Services/Authentication/DTO/LoginRequest";
+import {User} from "../../Data/Models/User";
 
 @Component({
   selector: 'app-authenticationlanding-page',
@@ -29,9 +31,9 @@ export class AuthenticationlandingPageComponent {
   })
 
   registerform = this.fb.nonNullable.group({
-    username: [""],
-    password: [""],
-    email: [""]
+    username: ["", Validators.required],
+    password: ["", Validators.required],
+    email: ["", Validators.required]
   })
 
   SwitchForm() {
@@ -48,23 +50,19 @@ export class AuthenticationlandingPageComponent {
   }
 
    Login() {
-    /*
-    let loginrequst = {
-      username: this.loginform.get('username')?.value,
-      password : this.loginform.get('password')?.value
+    if (this.loginform.value.username && this.loginform.value.password != null) {
+      let loginreq: LoginRequest
+      loginreq.username = this.loginform.value.username
+      loginreq.password = this.loginform.value.password
+      let token : string = ""
+      this.authservice.Login(loginreq).subscribe((res: string) => localStorage.setItem("usertoken", res))
+      if (localStorage.getItem('usertoken')) {
+        this.authservice.GetUserInfo(localStorage.getItem('usertoken')).subscribe( (res : User) => {
+          let userid = res.id
+          this.router.navigate(['/profile', userid])
+        })
+      }
     }
-    if (loginrequst.username && loginrequst.password != null)
-    {
-        let check = await this.authservice.Login(loginrequst)
-        if (check) {
-            this.router.navigate(['/profile'])
-        }
-        else {
-
-        }
-    }
-
-     */
   }
 
    Register() {
@@ -73,14 +71,11 @@ export class AuthenticationlandingPageComponent {
        registerreq.username = this.registerform.value.username
        registerreq.password = this.registerform.value.password
        registerreq.email = this.registerform.value.email
-       let check = this.authservice.Register(registerreq)
-       if (check) {
-         this.router.navigate(['/profile'])
-       }
-     }
-     else {
-       //return pop up
-     }
+       this.authservice.Register(registerreq).subscribe( (res) => {
+         if (res) {
+
+         }}
+       )}
   }
 
 }

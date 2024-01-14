@@ -1,0 +1,25 @@
+<div>
+
+  <div>
+    <img src="" appFallbackimage />
+    <p>{{user.username}}
+    <div>
+    <p>Number of Posts</p>
+    <p>{{user.posts.length}}</p>
+    </div>
+    <div>
+      <p>Join Date</p>
+      <p>{{user?.joineddate | date}}</p>
+    </div>
+  </div>
+
+  <div>
+    @for (post of user.posts; track post.id) {
+      <div>
+        <img src="{{dataservice.backendurl}}/ForumApp/Users/{{user.id}}/Images/{{user.profilepicfilename}}" appFallbackimage/>
+        <p>{{post.body}}</p>
+      </div>
+    }
+  </div>
+
+</div>

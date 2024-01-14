@@ -1,0 +1,7 @@
+<div class="flex flex-col items-center gap-2">
+  <form class="flex flex-col items-center gap-2" [formGroup]="inputform" (ngSubmit)="ReturnNewPost()">
+    <quill-editor [styles]="{color : 'white' }" format="json" placeholder="" formControlName="postcontent"></quill-editor>
+    <input class="border-gray-600 bg-gray-800 text-white p-3" type="submit" value="Submit Post">
+  </form>
+</div>
+

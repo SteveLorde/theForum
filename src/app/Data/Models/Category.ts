@@ -1,7 +1,7 @@
-import {SubCategories} from "./SubCategories";
+import {SubCategory} from "./SubCategory";
 
 export interface Category {
   id : string
   name : string
-  subcategories : SubCategories[]
+  subcategories : SubCategory[]
 }

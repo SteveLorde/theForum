@@ -8,4 +8,5 @@ export interface Thread {
   date : string
   numofposts : number
   userowner : User
+  lastpost? : Post
 }

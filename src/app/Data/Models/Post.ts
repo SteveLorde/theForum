@@ -2,7 +2,8 @@ import {User} from "./User";
 
 export interface Post {
   id : string
-  body : string
+  threadid : string
+  body : any
   user : User
   date : string
 }

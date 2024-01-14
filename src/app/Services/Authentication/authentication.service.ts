@@ -4,6 +4,7 @@ import {environment} from "../../../environments/environment";
 import {RegisterRequest} from "./DTO/RegisterRequest";
 import {AuthResponse} from "./DTO/AuthResponse";
 import {LoginRequest} from "./DTO/LoginRequest";
+import {User} from "../../Data/Models/User";
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +12,20 @@ import {LoginRequest} from "./DTO/LoginRequest";
 export class AuthenticationService {
 
   backendurl = environment.backendurl
+  activeuser : User
 
   constructor(private http: HttpClient) { }
 
   Login(loginrequest : LoginRequest) {
-    let response = this.http.post<AuthResponse>(`${this.backendurl}/Forum/Authentication/LoginTest`, loginrequest)
-    return response
+    return this.http.post<string>(`${this.backendurl}/Forum/Authentication/Login`, loginrequest)
   }
 
   Register(registereq : RegisterRequest) {
-    let response = this.http.post(`${this.backendurl}/Forum/Authentication/Register`, registereq)
-    return response
+    return this.http.post(`${this.backendurl}/Forum/Authentication/Register`, registereq)
   }
 
   GetUserInfo(token : string) {
-    let response = this.http.get(`${this.backendurl}/Forum/Authentication/GetUserInfo/${token}`)
-    return response
+    return this.http.get<User>(`${this.backendurl}/Forum/Authentication/GetUserInfo/${token}`)
   }
 
 }

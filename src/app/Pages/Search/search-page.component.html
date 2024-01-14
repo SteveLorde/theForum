@@ -3,15 +3,21 @@
 <div>
   <h3>Results for seaching: {{searchname}}</h3>
   <div *ngFor="let thread of searchedthreads">
+    <div>
+      <img src="{{dataservice.backendimageurl}}/{{thread.userowner.id}}/Images/{{thread.userowner.profilepicfilename}}" />
       <div>
         <p>{{thread.title}}</p>
         <p>{{thread.date}}</p>
       </div>
+    </div>
       <div>
         <p>{{thread.numofposts}}</p>
         <div>
           <p>latest post at</p>
-          <img src="" />
+          <div>
+            <img src="{{dataservice.backendimageurl}}/Users/{{thread.lastpost.user.id}}/Images/{{thread.lastpost.user.profilepicfilename}}" />
+            <p>{{thread.lastpost.date}}</p>
+          </div>
         </div>
       </div>
   </div>
