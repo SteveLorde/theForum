@@ -7,6 +7,7 @@ import {AuthenticationlandingPageComponent} from "./Pages/AuthenticationLanding/
 import {SubmitthreadPageComponent} from "./Pages/Submit/submitthread-page.component";
 import {ProfilePageComponent} from "./Pages/Profile/profile-page.component";
 import {NotificationsPageComponent} from "./Pages/Notifications/notifications-page.component";
+import {CreatethreadPageComponent} from "./Pages/CreateThread/createthread-page.component";
 
 export const routes: Routes = [
   {path: "", component: HomeComponent },
@@ -15,6 +16,6 @@ export const routes: Routes = [
   {path: "thread/:threadid", component: ThreadPageComponent },
   {path: "auth", component: AuthenticationlandingPageComponent },
   {path: "profile/:userid", component: ProfilePageComponent },
-  {path: "createthread", component: SubmitthreadPageComponent },
+  {path: "createthread", component: CreatethreadPageComponent },
   {path: "notifications", component: NotificationsPageComponent },
 ];

@@ -46,6 +46,11 @@ export class DataService {
     return this.http.post<boolean>(`${this.backendurl}/ForumApp/createthread/`, newthread)
   }
 
+  AddThread(thread : Thread) {
+    //return the newly created thread id
+    return this.http.post<string>(`${this.backendurl}/ForumApp/addthread`, thread )
+  }
+
   AddPost(post : Post) {
     return this.http.post<boolean>(`${this.backendurl}/ForumApp/addpost`, post)
   }

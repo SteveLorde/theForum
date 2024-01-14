@@ -1,0 +1,7 @@
+
+<form class="flex flex-col items-center" [formGroup]="newthreadform" (ngSubmit)="SubmitThread()">
+  <input class="text-4xl" type="text" placeholder="Enter Title..." formControlName="threadtitle"/>
+  <app-post-input formControlName="postbody"></app-post-input>
+  <input class="p-2" type="submit" value="Submit Thread" />
+</form>
+
