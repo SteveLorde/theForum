@@ -51,11 +51,8 @@ export class AuthenticationlandingPageComponent {
 
    Login() {
     if (this.loginform.value.username && this.loginform.value.password != null) {
-      let loginreq: LoginRequest
-      loginreq.username = this.loginform.value.username
-      loginreq.password = this.loginform.value.password
-      let token : string = ""
-      this.authservice.Login(loginreq).subscribe((res: string) => localStorage.setItem("usertoken", res))
+      let loginreq: LoginRequest = {username: this.loginform.controls.username.value, password: this.loginform.controls.password.value }
+      this.authservice.Login(loginreq).subscribe((token: string) => localStorage.setItem("usertoken", token))
       if (localStorage.getItem('usertoken')) {
         this.authservice.GetUserInfo(localStorage.getItem('usertoken')).subscribe( (res : User) => {
           let userid = res.id
