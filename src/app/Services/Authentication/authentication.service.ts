@@ -21,7 +21,8 @@ export class AuthenticationService {
   }
 
   Register(registereq : RegisterRequest) {
-    return this.http.post(`${this.backendurl}/Forum/Authentication/Register`, registereq)
+    //returns token
+    return this.http.post<string>(`${this.backendurl}/Forum/Authentication/Register`, registereq)
   }
 
   GetUserInfo(token : string) {

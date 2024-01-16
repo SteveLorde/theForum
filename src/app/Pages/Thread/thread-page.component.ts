@@ -10,6 +10,7 @@ import {AuthenticationService} from "../../Services/Authentication/authenticatio
 import {FallbackimageDirective} from "../../ComponentsUtilities/Directives/fallbackimage.directive";
 import {Post} from "../../Data/Models/Post";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
+import {FormControl, FormGroup, FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-thread-page',
@@ -18,7 +19,8 @@ import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvid
     NgForOf,
     PostInputComponent,
     RouterLink,
-    FallbackimageDirective
+    FallbackimageDirective,
+    FormsModule
   ],
   templateUrl: './thread-page.component.html',
   styleUrl: './thread-page.component.scss'
@@ -28,9 +30,6 @@ export class ThreadPageComponent implements OnInit {
   routethreadid : string = ""
   thread : Thread = {} as Thread
   imgurl = this.dataservice.backendimageurl
-  postcontent : any
-
-  @ViewChild(PostInputComponent) postinput : PostInputComponent
 
 
   constructor(private route : ActivatedRoute, private dataservice : DataService, private authservice : AuthenticationService) {
@@ -44,18 +43,22 @@ export class ThreadPageComponent implements OnInit {
     console.log(this.thread)
   }
 
+  postform = new FormGroup( {
+    postcontent: new FormControl(null)
+  })
+
   GetThread(threadid : string) {
     this.dataservice.GetThread(threadid).subscribe( (res : Thread) =>
     this.thread = res
     )
   }
 
-  NewPost() {
+  SubmitPost() {
     //get post body and create new post
-    let newpost : Post = {id: "", body: this.postcontent, threadid: this.thread.id, date: new Date().getTime().toString(), user: this.authservice.activeuser}
+    let newpost : Post = {id: "", body: this.postform.controls.postcontent, threadid: this.thread.id, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
     this.dataservice.AddPost(newpost).subscribe( res => {
         if (res) {
-          this.postinput.ConfirmPosted()
+          this.postform.reset()
         }
         else {
           Swal.fire("Error posting")

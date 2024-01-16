@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {Category} from "../../Data/Models/Category";
 import {Post} from "../../Data/Models/Post";
 import {User} from "../../Data/Models/User";
+import {SubCategory} from "../../Data/Models/SubCategory";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class DataService {
   }
 
   GetCategoryThreads(subcategoryid : string){
-    return this.http.get<Thread[]>(`${this.backendurl}/ForumApp/threads/getsubcategorythreads/${subcategoryid}`)
+    return this.http.get<SubCategory>(`${this.backendurl}/ForumApp/threads/getsubcategorythreads/${subcategoryid}`)
   }
 
   GetThread(threadid : string) {

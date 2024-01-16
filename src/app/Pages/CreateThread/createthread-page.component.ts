@@ -1,38 +1,52 @@
 import { Component } from '@angular/core';
 import {PostInputComponent} from "../../Components/PostInput/post-input.component";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Thread} from "../../Data/Models/Thread";
 import {Post} from "../../Data/Models/Post";
 import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 import {DataService} from "../../Services/DataService/data.service";
-import {Router} from "@angular/router";
-
+import {ActivatedRoute, Router} from "@angular/router";
+import {QuillEditorComponent} from "ngx-quill";
+import {Location} from '@angular/common'
 @Component({
   selector: 'app-createthread-page',
   standalone: true,
   imports: [
     PostInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillEditorComponent,
+    FormsModule
   ],
   templateUrl: './createthread-page.component.html',
   styleUrl: './createthread-page.component.scss'
 })
 export class CreatethreadPageComponent {
 
-  constructor(private authservice : AuthenticationService, private dataservice : DataService, private router : Router) {
+  CurrentPage: Location
+  subcatid : string
+  postbody : any
+
+  constructor(private authservice : AuthenticationService, private dataservice : DataService, private router : Router, private route : ActivatedRoute) {
+    this.route.paramMap.subscribe( params =>
+      this.subcatid = params.get('subcatid')
+    )
   }
 
   newthreadform = new FormGroup({
     threadtitle : new FormControl('', Validators.required),
-    postbody : new FormControl(null)
+    postcontent: new FormControl(null)
   })
 
   SubmitThread() {
-    let newpost : Post = {body: this.newthreadform.controls.postbody.value, date: new Date().getTime().toString(), id: "", threadid: "", user: this.authservice.activeuser}
-    let newthread : Thread = {date: new Date().getTime().toString(), id: "", numofposts: 1, posts: [newpost], title: this.newthreadform.controls.threadtitle.value, userowner: this.authservice.activeuser }
-    this.dataservice.AddThread(newthread).subscribe( (res : string) => {
-      this.router.navigate(['/thread', res])
+    let newpost : Post = {body: this.newthreadform.controls.postcontent, date: new Date().getTime().toString(), id: "", threadid: "", userposter: this.authservice.activeuser}
+    let newthread : Thread = {subcategoryid: this.subcatid,date: new Date().getTime().toString(), id: "", numofposts: 1, posts: [newpost], title: this.newthreadform.controls.threadtitle.value, userowner: this.authservice.activeuser }
+    this.dataservice.AddThread(newthread).subscribe( (threadid : string) => {
+      this.router.navigate(['/thread', threadid])
     })
+  }
+
+  ReturnToSubCategory() {
+    this.CurrentPage.back()
   }
 
 }

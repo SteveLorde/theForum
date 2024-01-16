@@ -4,6 +4,6 @@ export interface Post {
   id : string
   threadid : string
   body : any
-  user : User
+  userposter : User
   date : string
 }

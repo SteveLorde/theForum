@@ -7,7 +7,7 @@
     @for (post of thread.posts; track post.id) {
       <div class="flex flex-row w-900px bg-gray-700 m-2 p-3 items-center ">
         <div class="flex flex-col p-1 pr-4 border-r-2 border-gray-900">
-          <p>{{post.user.username}}</p>
+          <p>{{post.userposter.username}}</p>
           <img class="size-12" src="" appFallbackimage/>
         </div>
         <div class="p-2">
@@ -17,6 +17,10 @@
     }
   </div>
 
-  <app-post-input (newpost)="newpost"></app-post-input>
+  <form formGroupName="" (ngSubmit)="SubmitPost()">
+    <app-post-input [form]=""></app-post-input>
+    <input type="submit" value="Submit Post" />
+  </form>
+
 
 </div>

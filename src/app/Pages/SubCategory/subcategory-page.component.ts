@@ -5,6 +5,7 @@ import {ActivatedRoute, Route, Router} from "@angular/router";
 import {FallbackimageDirective} from "../../ComponentsUtilities/Directives/fallbackimage.directive";
 import {DataService} from "../../Services/DataService/data.service";
 import Swal from "sweetalert2";
+import {SubCategory} from "../../Data/Models/SubCategory";
 
 @Component({
   selector: 'app-subcategory-page',
@@ -35,8 +36,8 @@ export class SubcategoryPageComponent implements OnInit{
 
 
   GetThreads(subcategoryid : string) {
-    this.dataservice.GetCategoryThreads(subcategoryid).subscribe( (res : Thread[]) => {
-        this.threads = res
+    this.dataservice.GetCategoryThreads(subcategoryid).subscribe( (res : SubCategory) => {
+        this.threads = res.threads
       }
     )
   }

@@ -1,7 +1,10 @@
+<div>
+  <button (click)="ReturnToSubCategory()">Back</button>
+  <form class="flex flex-col items-center gap-7" [formGroup]="newthreadform" (ngSubmit)="SubmitThread()">
+    <input class="bg-none p-2" type="text" placeholder="Enter Title..." formControlName="threadtitle" />
+    <app-post-input [form]="newthreadform"></app-post-input>
+    <input class="bg-gray-700 p-3 rounded-2xl hover:cursor-pointer text-white" type="submit" value="Submit Thread" />
+  </form>
+</div>
 
-<form class="flex flex-col items-center" [formGroup]="newthreadform" (ngSubmit)="SubmitThread()">
-  <input class="text-4xl" type="text" placeholder="Enter Title..." formControlName="threadtitle"/>
-  <app-post-input formControlName="postbody"></app-post-input>
-  <input class="p-2" type="submit" value="Submit Thread" />
-</form>
 

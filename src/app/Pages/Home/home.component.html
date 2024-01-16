@@ -9,9 +9,12 @@
     <div class="bg-gray-700 flex flex-wrap flex-col p-3" *ngFor="let category of categories">
       <h2 class="text-white font-extrabold p-1 mt-1">{{category.name}}</h2>
       <div class="border-2 border-gray-400 flex flex-col">
-        <div class="bg-gray-800  hover:cursor-pointer p-1 hover:bg-gray-700" *ngFor="let subcategory of category.subcategories">
-          <p (click)="NavigateToSubCategory(subcategory.id)" class="text-white">{{subcategory.name}}</p>
-          <p>{{subcategory.numofthreads}}</p>
+        <div class="flex flex-row items-center justify-between bg-gray-800 hover:cursor-pointer p-1 hover:bg-gray-700" (click)="NavigateToSubCategory(subcategory.id)" *ngFor="let subcategory of category.subcategories">
+          <p  class="text-white">{{subcategory.name}}</p>
+          <div class="flex flex-col p-1 items-center">
+            <p class="text-white">Num of Threads</p>
+            <p class="text-white">{{subcategory.numofthreads}}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import {Post} from "../../Data/Models/Post";
 import {User} from "../../Data/Models/User";
 import {QuillEditorComponent, QuillViewComponent} from "ngx-quill";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 
 @Component({
   selector: 'app-post-input',
@@ -22,30 +23,23 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss'
 })
-export class PostInputComponent implements OnInit {
+export class PostInputComponent {
 
-  @Input() userposter : User = {} as User
-  @Output() newpost = new EventEmitter<any>()
+  @Input() form : FormGroup
 
-  constructor() {}
-
-  inputform = new FormGroup({
+  constructor(private authservice : AuthenticationService) {
+    this.form = new FormGroup({
       postcontent : new FormControl(null)
-  })
-
-  ngOnInit() {
-
+    })
   }
 
+  /*
   ReturnNewPost() {
-    let newpostbody = this.inputform.controls.postcontent.value
-    this.newpost = newpostbody
+    let newpost : Post = {body: this.form.controls.postcontent, date: new Date().getTime().toString(), id: "", threadid: "", userposter: this.authservice.activeuser}
+    this.form.controls.postcontent.reset()
+    return newpost
   }
 
-  ConfirmPosted() {
-      this.inputform.controls.postcontent.reset()
-  }
-
-
+   */
 
 }

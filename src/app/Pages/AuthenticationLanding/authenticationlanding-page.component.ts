@@ -66,14 +66,15 @@ export class AuthenticationlandingPageComponent {
   }
 
    Register() {
-      let registerreq : RegisterRequest = {} as RegisterRequest
+    let registerreq : RegisterRequest = {} as RegisterRequest
      if (this.registerform.value.username && this.registerform.value.password && this.registerform.value.email !== undefined) {
-       registerreq.username = this.registerform.value.username
-       registerreq.password = this.registerform.value.password
-       registerreq.email = this.registerform.value.email
-       this.authservice.Register(registerreq).subscribe( (res) => {
-         if (res) {
-
+       registerreq.username = this.registerform.controls.username.value
+       registerreq.password = this.registerform.controls.password.value
+       registerreq.email = this.registerform.controls.email.value
+       this.authservice.Register(registerreq).subscribe( (token) => {
+         if (token) {
+           localStorage.setItem('usertoken', token)
+           this.authservice.GetUserInfo(localStorage.getItem('usertoken')).subscribe( (res : User) => this.router.navigate(['profile', res.id]))
          }}
        )}
   }
