@@ -23,12 +23,14 @@ export class HomeComponent implements OnInit{
 
   ngOnInit() {
     this.GetCategories()
+    console.log(this.categories)
   }
 
 
   GetCategories() {
     this.dataservice.GetCategories().subscribe( (res : Category[]) =>
       this.categories = res
+
     )
   }
 

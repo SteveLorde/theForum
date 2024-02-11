@@ -2,10 +2,11 @@ import {HttpEvent, HttpHandlerFn, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  let usertoken = "localStorage.getItem('usertoken')"
-  if (usertoken != null) {
+  if (typeof localStorage !== undefined && null && "") {
+    //WILL AUTOMATICALLY APPEND NEW HEADER IF USERTOKEN IS FOUND
+    let usertoken = localStorage.getItem('usertoken')
     const reqWithHeaderToken = req.clone({
-      headers: req.headers.append( "Authorization", `Bearer ${usertoken}` ),
+      headers: req.headers.set("Authorization", `Bearer ${usertoken}` ),
     })
     return next(reqWithHeaderToken);
   }

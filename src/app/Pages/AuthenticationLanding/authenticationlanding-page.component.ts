@@ -5,12 +5,14 @@ import {AuthenticationService} from "../../Services/Authentication/authenticatio
 import {RegisterRequest} from "../../Services/Authentication/DTO/RegisterRequest";
 import {LoginRequest} from "../../Services/Authentication/DTO/LoginRequest";
 import {User} from "../../Data/Models/User";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-authenticationlanding-page',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './authenticationlanding-page.component.html',
   styleUrl: './authenticationlanding-page.component.scss'
@@ -52,28 +54,25 @@ export class AuthenticationlandingPageComponent {
    Login() {
     if (this.loginform.value.username && this.loginform.value.password != null) {
       let loginreq: LoginRequest = {username: this.loginform.controls.username.value, password: this.loginform.controls.password.value }
-      this.authservice.Login(loginreq).subscribe((token: string) => localStorage.setItem("usertoken", token))
-      if (localStorage.getItem('usertoken')) {
-        this.authservice.GetUserInfo(localStorage.getItem('usertoken')).subscribe( (res : User) => {
-          let userid = res.id
-          this.router.navigate(['/profile', userid])
+      this.authservice.Login(loginreq).subscribe(res => {
+        if (res) {this.router.navigate(['/profile', this.authservice.activeuser.id])}
         })
       }
-    }
   }
 
    Register() {
-    let registerreq : RegisterRequest = {} as RegisterRequest
+     let registerreq: RegisterRequest = {} as RegisterRequest
      if (this.registerform.value.username && this.registerform.value.password && this.registerform.value.email !== undefined) {
        registerreq.username = this.registerform.controls.username.value
        registerreq.password = this.registerform.controls.password.value
        registerreq.email = this.registerform.controls.email.value
-       this.authservice.Register(registerreq).subscribe( (token) => {
-         if (token) {
-           localStorage.setItem('usertoken', token)
-           this.authservice.GetUserInfo(localStorage.getItem('usertoken')).subscribe( (res : User) => this.router.navigate(['profile', res.id]))
-         }}
-       )}
-  }
+       this.authservice.Register(registerreq).subscribe(res => {
+         if (res) {
+           this.router.navigate(["/profile", this.authservice.activeuser.id])
+         }
+       })
+     }
+   }
+
 
 }

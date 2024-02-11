@@ -55,10 +55,11 @@ export class ThreadPageComponent implements OnInit {
 
   SubmitPost() {
     //get post body and create new post
-    let newpost : Post = {id: "", body: this.postform.controls.postcontent, threadid: this.thread.id, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
+    let newpost : Post = {id: "", body: this.postform.controls.postcontent.value, threadid: this.thread.id, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
+    console.log(newpost)
     this.dataservice.AddPost(newpost).subscribe( res => {
         if (res) {
-          this.postform.reset()
+          location.reload()
         }
         else {
           Swal.fire("Error posting")

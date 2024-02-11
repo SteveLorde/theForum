@@ -1,7 +1,6 @@
 <p>thread-page works!</p>
 
-<div>
-
+<div class="flex flex-col items-center">
   <div class="flex flex-col items-center">
     <h3 class="m-2 text-white font-bold text-3xl">{{thread.title}}</h3>
     @for (post of thread.posts; track post.id) {
@@ -17,10 +16,8 @@
     }
   </div>
 
-  <form formGroupName="" (ngSubmit)="SubmitPost()">
-    <app-post-input [form]=""></app-post-input>
-    <input type="submit" value="Submit Post" />
+  <form class="flex flex-col items-center" formGroupName="postform" (ngSubmit)="SubmitPost()">
+    <app-post-input [form]="postform"></app-post-input>
+    <input class="bg-white p-2 text-black" type="submit" value="Submit Post" />
   </form>
-
-
 </div>

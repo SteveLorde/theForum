@@ -24,7 +24,7 @@ export class DataService {
   //users endpoints
 
   GetUserProfile(userid : string) {
-    return this.http.get<User>(`${this.backendurl}/ForumApp/users/getuserprofile/${userid}`)
+    return this.http.get<User>(`${this.backendurl}/ForumApp/users/getuser/${userid}`)
   }
 
   GetCategories(){
@@ -53,7 +53,7 @@ export class DataService {
   }
 
   AddPost(post : Post) {
-    return this.http.post<boolean>(`${this.backendurl}/ForumApp/addpost`, post)
+    return this.http.post<boolean>(`${this.backendurl}/ForumApp/AddPost`, post)
   }
 
 

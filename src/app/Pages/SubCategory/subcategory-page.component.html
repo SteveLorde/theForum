@@ -7,7 +7,7 @@
       <p class="text-2xl text-white">No Threads</p>
     }
     @for (thread of threads; track thread.id) {
-      <div (click)="NavigateToThread(thread.id)" class="bg-gray-700 m-2 p-2 flex flex-row hover:cursor-pointer hover:bg-gray-600">
+      <div (click)="NavigateToThread(thread.id)" class="bg-gray-700 m-2 p-2 flex flex-row content-evenly hover:cursor-pointer hover:bg-gray-600">
         <div>
           <p class="text-white">{{thread.date | date}}</p>
           <p class="text-white">{{thread.title}}</p>
