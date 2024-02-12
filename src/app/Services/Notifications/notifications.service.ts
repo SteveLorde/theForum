@@ -18,7 +18,7 @@ export class NotificationsService {
   constructor(@Inject(PLATFORM_ID) private platformid : any ) {
     this.isBrowser = isPlatformBrowser(this.platformid)
     if (this.isBrowser) {
-      this.sse = new EventSource(`${this.backendurl}/ForumApp/notifications`)
+      //this.sse = new EventSource(`${this.backendurl}/ForumApp/notifications`)
     }
   }
 
