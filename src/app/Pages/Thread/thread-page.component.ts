@@ -54,18 +54,24 @@ export class ThreadPageComponent implements OnInit {
   }
 
   SubmitPost() {
-    //get post body and create new post
-    let newpost : Post = {id: "", body: this.postform.controls.postcontent.value, threadid: this.thread.id, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
-    console.log(newpost)
-    this.dataservice.AddPost(newpost).subscribe( res => {
-        if (res) {
-          location.reload()
+    //Check Login
+    if (this.authservice.activeuser == null || undefined) {
+      Swal.fire("Please Login To Post or Create Thread")
+    }
+    else {
+      //get post body and create new post
+      let newpost : Post = {id: "", body: this.postform.controls.postcontent.value, threadid: this.thread.id, ordernum: this.thread.posts.length + 1, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
+      console.log(newpost)
+      this.dataservice.AddPost(newpost).subscribe( res => {
+          if (res) {
+            location.reload()
+          }
+          else {
+            Swal.fire("Error posting")
+          }
         }
-        else {
-          Swal.fire("Error posting")
-        }
-      }
-    )
+      )
+    }
   }
 
 }

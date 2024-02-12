@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit{
   GetCategories() {
     this.dataservice.GetCategories().subscribe( (res : Category[]) =>
       this.categories = res
+      //sort categories
 
     )
   }

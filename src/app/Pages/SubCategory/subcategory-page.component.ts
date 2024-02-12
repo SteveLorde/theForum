@@ -6,6 +6,7 @@ import {FallbackimageDirective} from "../../ComponentsUtilities/Directives/fallb
 import {DataService} from "../../Services/DataService/data.service";
 import Swal from "sweetalert2";
 import {SubCategory} from "../../Data/Models/SubCategory";
+import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 
 @Component({
   selector: 'app-subcategory-page',
@@ -24,7 +25,7 @@ export class SubcategoryPageComponent implements OnInit{
   threads : Thread[] = []
   imgurl : string = this.dataservice.backendimageurl
 
-  constructor(private router : Router, private route : ActivatedRoute ,private dataservice : DataService) {
+  constructor(private router : Router, private route : ActivatedRoute ,private dataservice : DataService, private authservice : AuthenticationService) {
   }
 
   ngOnInit() {
@@ -47,9 +48,9 @@ export class SubcategoryPageComponent implements OnInit{
   }
 
   CreateThread() {
-    let checkuser = localStorage.getItem('usertoken')
-    if (!checkuser) {
-      Swal.fire("Please Login to Create a Thread")
+    //check login
+    if (this.authservice.activeuser == null || undefined) {
+      Swal.fire("Please Login To Create Thread")
     }
     else {
       this.router.navigate(["/createthread"])

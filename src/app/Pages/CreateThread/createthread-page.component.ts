@@ -8,6 +8,7 @@ import {DataService} from "../../Services/DataService/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuillEditorComponent} from "ngx-quill";
 import {Location} from '@angular/common'
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-createthread-page',
   standalone: true,
@@ -38,11 +39,17 @@ export class CreatethreadPageComponent {
   })
 
   SubmitThread() {
-    let newpost : Post = {body: this.newthreadform.controls.postcontent, date: new Date().getTime().toString(), id: "", threadid: "", userposter: this.authservice.activeuser}
-    let newthread : Thread = {subcategoryid: this.subcatid,date: new Date().getTime().toString(), id: "", numofposts: 1, posts: [newpost], title: this.newthreadform.controls.threadtitle.value, userowner: this.authservice.activeuser }
-    this.dataservice.AddThread(newthread).subscribe( (threadid : string) => {
-      this.router.navigate(['/thread', threadid])
-    })
+    //check login
+    if (this.authservice.activeuser == null || undefined) {
+      Swal.fire("Please Login to Create Thread")
+    }
+    else {
+      let newpost : Post = {body: this.newthreadform.controls.postcontent, date: new Date().getTime().toString(), id: "", threadid: "", ordernum: 1 ,userposter: this.authservice.activeuser}
+      let newthread : Thread = {subcategoryid: this.subcatid,date: new Date().getTime().toString(), id: "", numofposts: 1, posts: [newpost], title: this.newthreadform.controls.threadtitle.value, userowner: this.authservice.activeuser }
+      this.dataservice.AddThread(newthread).subscribe( (threadid : string) => {
+        this.router.navigate(['/thread', threadid])
+      })
+    }
   }
 
   ReturnToSubCategory() {

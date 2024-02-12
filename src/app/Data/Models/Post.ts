@@ -6,4 +6,5 @@ export interface Post {
   body : any
   userposter : User
   date : string
+  ordernum : number
 }

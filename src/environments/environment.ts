@@ -1,4 +1,4 @@
 export const environment = {
   production : true,
-  backendurl: "https://mybackendapi-f8dced6f5388.herokuapp.com"
+  backendurl: "http://41.232.109.57:40080/"
 };

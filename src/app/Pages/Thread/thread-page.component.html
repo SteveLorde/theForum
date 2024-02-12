@@ -5,8 +5,8 @@
     <h3 class="m-2 text-white font-bold text-3xl">{{thread.title}}</h3>
     @for (post of thread.posts; track post.id) {
       <div class="flex flex-row w-900px bg-gray-700 m-2 p-3 items-center ">
-        <div class="flex flex-col p-1 pr-4 border-r-2 border-gray-900">
-          <p>{{post.userposter.username}}</p>
+        <div class="flex flex-col items-center gap-1 p-1 pr-4 border-r-2 border-gray-900">
+          <p class="text-white">{{post.userposter.username}}</p>
           <img class="size-12" src="" appFallbackimage/>
         </div>
         <div class="p-2">
