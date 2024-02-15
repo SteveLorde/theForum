@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {RegisterRequest} from "./DTO/RegisterRequest";
 import {AuthResponse} from "./DTO/AuthResponse";
@@ -14,49 +14,42 @@ import {map} from "rxjs";
 export class AuthenticationService {
 
   backendurl = environment.backendurl
+  activeuser : User = {} as User
 
-  activeuser : User
 
   constructor(private http: HttpClient) { }
 
   Login(loginrequest : LoginRequest) {
     return this.http.post<string>(`${this.backendurl}/ForumApp/authentication/login`, loginrequest).pipe(
-      map( res => {
-        let logincheck : boolean
-        if (res != null && undefined && "") {localStorage.setItem('usertoken', res)}
-        this.GetActiveUserInfo().subscribe(res => logincheck = res)
-        return logincheck
+      map ( responsetoken => {
+        localStorage.setItem("usertoken", responsetoken)
+        return true
       })
     )
   }
 
   Register(registereq : RegisterRequest) {
     //returns token
-    return this.http.post<any>(`${this.backendurl}/ForumApp/authentication/register`, registereq).pipe(
-      map( (res : boolean) => {
-        let registercheck : boolean
-        if (res) {
-          let loginreq = {username: registereq.username, password: registereq.password}
-          this.Login(loginreq).subscribe(res => {
-            if (res) {registercheck = true} else {registercheck = false}
-          })
-        }
-        return registercheck
-      })
-    )
+    return this.http.post<any>(`${this.backendurl}/ForumApp/authentication/register`, registereq)
   }
 
   GetActiveUserInfo() {
     //BY AUTO APPENDING THE USERTOKEN IN HTTP REQUEST HEADER
-    return this.http.get<User>(`${this.backendurl}/ForumApp/authentication/authentication/getactiveuserinfo`).pipe(
-      map( (res : User) => {
-        if (res != null && undefined && "") {
-          this.activeuser = res
+    return this.http.get<User>(`${this.backendurl}/ForumApp/authentication/getactiveuserinfo`).pipe(
+      map ( (res: User) => {
+        this.activeuser = res
+        if (this.activeuser.id != null && undefined) {
           return true
         }
-        else {return false}
+        else {
+          return false
+        }
       })
     )
+  }
+
+  Logout() {
+
   }
 
 }

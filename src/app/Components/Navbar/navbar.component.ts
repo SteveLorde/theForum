@@ -1,6 +1,7 @@
 import {Component, signal} from '@angular/core';
 import {NotificationsService} from "../../Services/Notifications/notifications.service";
 import {sign} from "node:crypto";
+import {AuthenticationService} from "../../Services/Authentication/authentication.service";
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +12,28 @@ import {sign} from "node:crypto";
 })
 export class NavbarComponent {
 
-  authstatus : string = "Login"
+  loginstatus = signal("Login / Register")
   numofmessages = signal(0)
   messages : MessageEvent[] = []
 
-  constructor(private notifservice : NotificationsService) {
+  constructor(private notifservice : NotificationsService, private authservice : AuthenticationService) {
 
   }
 
   ngOnInit() {
-
+    this.CheckLoginStatus()
   }
+
+  CheckLoginStatus() {
+    if (this.authservice.activeuser != null && undefined) {
+      this.loginstatus.set(`${this.authservice.activeuser.username}`)
+    }
+    else {
+      this.loginstatus.set("Login / Register")
+    }
+  }
+
+
 
 
 

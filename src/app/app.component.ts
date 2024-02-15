@@ -16,15 +16,16 @@ export class AppComponent implements OnInit{
   title = 'forum-client';
 
   constructor(private authservice : AuthenticationService) {
+
   }
   ngOnInit() {
     this.AutoLogin()
   }
 
   AutoLogin() {
-    if (typeof localStorage !== null && undefined) {
-      if (localStorage.getItem("usertoken")) {
-
+    if (typeof localStorage !== 'undefined') {
+      if (localStorage.getItem("usertoken") !== 'undefined') {
+        this.authservice.GetActiveUserInfo()
       }
     }
   }

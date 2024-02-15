@@ -14,7 +14,7 @@ export const routes: Routes = [
   {path: "subcategory/:subcategoryid", component: SubcategoryPageComponent },
   {path: "thread/:threadid", component: ThreadPageComponent },
   {path: "auth", component: AuthenticationlandingPageComponent },
-  {path: "profile/:userid", component: ProfilePageComponent },
+  {path: "profile", component: ProfilePageComponent },
   {path: "createthread/:subcatid", component: CreatethreadPageComponent },
   {path: "notifications", component: NotificationsPageComponent },
 ];

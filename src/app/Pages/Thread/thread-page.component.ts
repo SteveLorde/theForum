@@ -11,6 +11,7 @@ import {FallbackimageDirective} from "../../ComponentsUtilities/Directives/fallb
 import {Post} from "../../Data/Models/Post";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {FormControl, FormGroup, FormsModule} from "@angular/forms";
+import {AddPost} from "../../Data/Models/AddPost";
 
 @Component({
   selector: 'app-thread-page',
@@ -32,7 +33,7 @@ export class ThreadPageComponent implements OnInit {
   imgurl = this.dataservice.backendimageurl
 
 
-  constructor(private route : ActivatedRoute, private dataservice : DataService, private authservice : AuthenticationService) {
+  constructor(private route : ActivatedRoute, public dataservice : DataService, private authservice : AuthenticationService) {
   }
 
   ngOnInit() {
@@ -60,7 +61,7 @@ export class ThreadPageComponent implements OnInit {
     }
     else {
       //get post body and create new post
-      let newpost : Post = {id: "", body: this.postform.controls.postcontent.value, threadid: this.thread.id, ordernum: this.thread.posts.length + 1, date: new Date().getTime().toString(), userposter: this.authservice.activeuser}
+      let newpost : AddPost = {body: this.postform.controls.postcontent.value, threadid: this.thread.id, userid: this.authservice.activeuser.id}
       console.log(newpost)
       this.dataservice.AddPost(newpost).subscribe( res => {
           if (res) {

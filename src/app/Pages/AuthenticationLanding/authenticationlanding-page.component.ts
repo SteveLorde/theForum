@@ -6,6 +6,7 @@ import {RegisterRequest} from "../../Services/Authentication/DTO/RegisterRequest
 import {LoginRequest} from "../../Services/Authentication/DTO/LoginRequest";
 import {User} from "../../Data/Models/User";
 import {NgIf} from "@angular/common";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-authenticationlanding-page',
@@ -53,11 +54,13 @@ export class AuthenticationlandingPageComponent {
 
    Login() {
     if (this.loginform.value.username && this.loginform.value.password != null) {
-      let loginreq: LoginRequest = {username: this.loginform.controls.username.value, password: this.loginform.controls.password.value }
+      let loginreq: LoginRequest = {username: this.loginform.controls.username.value, password: this.loginform.controls.password.value}
       this.authservice.Login(loginreq).subscribe(res => {
-        if (res) {this.router.navigate(['/profile', this.authservice.activeuser.id])}
-        })
-      }
+        if (res) {
+          this.router.navigate(['/profile'])
+        }
+      })
+    }
   }
 
    Register() {
@@ -66,11 +69,7 @@ export class AuthenticationlandingPageComponent {
        registerreq.username = this.registerform.controls.username.value
        registerreq.password = this.registerform.controls.password.value
        registerreq.email = this.registerform.controls.email.value
-       this.authservice.Register(registerreq).subscribe(res => {
-         if (res) {
-           this.router.navigate(["/profile", this.authservice.activeuser.id])
-         }
-       })
+       this.authservice.Register(registerreq).subscribe()
      }
    }
 

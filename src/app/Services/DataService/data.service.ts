@@ -7,6 +7,7 @@ import {Category} from "../../Data/Models/Category";
 import {Post} from "../../Data/Models/Post";
 import {User} from "../../Data/Models/User";
 import {SubCategory} from "../../Data/Models/SubCategory";
+import {AddPost} from "../../Data/Models/AddPost";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class DataService {
     return this.http.post<string>(`${this.backendurl}/ForumApp/addthread`, thread )
   }
 
-  AddPost(post : Post) {
+  AddPost(post : AddPost) {
     return this.http.post<boolean>(`${this.backendurl}/ForumApp/AddPost`, post)
   }
 

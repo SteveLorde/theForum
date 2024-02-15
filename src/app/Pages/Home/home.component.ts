@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit{
 
   ngOnInit() {
     this.GetCategories()
+
     console.log(this.categories)
   }
 
@@ -30,9 +31,8 @@ export class HomeComponent implements OnInit{
   GetCategories() {
     this.dataservice.GetCategories().subscribe( (res : Category[]) =>
       this.categories = res
-      //sort categories
-
     )
+    this.categories.sort( (a,b) => a.orderingid - b.orderingid)
   }
 
   NavigateToSubCategory(subcategoryid : string) {
