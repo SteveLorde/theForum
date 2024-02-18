@@ -16,7 +16,6 @@ export class AuthenticationService {
   backendurl = environment.backendurl
   activeuser : User = {} as User
 
-
   constructor(private http: HttpClient) { }
 
   Login(loginrequest : LoginRequest) {
@@ -38,7 +37,7 @@ export class AuthenticationService {
     return this.http.get<User>(`${this.backendurl}/ForumApp/authentication/getactiveuserinfo`).pipe(
       map ( (res: User) => {
         this.activeuser = res
-        if (this.activeuser.id != null && undefined) {
+        if (this.activeuser.id !== null && this.activeuser.id !== "undefined") {
           return true
         }
         else {
@@ -49,7 +48,8 @@ export class AuthenticationService {
   }
 
   Logout() {
-
+    localStorage.removeItem("usertoken")
+    this.activeuser = {} as User
   }
 
 }

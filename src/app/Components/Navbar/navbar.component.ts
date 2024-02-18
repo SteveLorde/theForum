@@ -25,7 +25,7 @@ export class NavbarComponent {
   }
 
   CheckLoginStatus() {
-    if (this.authservice.activeuser != null && undefined) {
+    if (this.authservice.activeuser != null) {
       this.loginstatus.set(`${this.authservice.activeuser.username}`)
     }
     else {
