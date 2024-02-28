@@ -69,7 +69,14 @@ export class AuthenticationlandingPageComponent {
        registerreq.username = this.registerform.controls.username.value
        registerreq.password = this.registerform.controls.password.value
        registerreq.email = this.registerform.controls.email.value
-       this.authservice.Register(registerreq).subscribe()
+       this.authservice.Register(registerreq).subscribe(res => {
+         if (res) {
+           this.router.navigate(['/profile'])
+         }
+         else {
+           Swal.fire("Error in Register Process")
+         }
+       })
      }
    }
 

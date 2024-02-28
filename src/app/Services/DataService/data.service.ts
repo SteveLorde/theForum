@@ -29,7 +29,7 @@ export class DataService {
   }
 
   GetCategories(){
-    return this.http.get<Category[]>('https://myapi.thegenericcompany.xyz/ForumApp/categories/getcategories')
+    return this.http.get<Category[]>(`${this.backendurl}/ForumApp/categories/getcategories`)
   }
 
   GetCategoryThreads(subcategoryid : string){
@@ -55,6 +55,14 @@ export class DataService {
 
   AddPost(post : AddPost) {
     return this.http.post<boolean>(`${this.backendurl}/ForumApp/AddPost`, post)
+  }
+
+  DeleteThread(threadid : string) {
+    return this.http.get<boolean>(`${this.backendurl}/ForumApp/DeleteThread/${threadid}`)
+  }
+
+  DeletePost(postid : string) {
+    return this.http.get<boolean>(`${this.backendurl}/ForumApp/DeletePost/${postid}`)
   }
 
 

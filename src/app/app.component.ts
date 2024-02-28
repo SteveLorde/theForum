@@ -19,15 +19,11 @@ export class AppComponent implements OnInit{
 
   }
   ngOnInit() {
-    this.AutoLogin()
+    //this.AutoLogin()
   }
 
   AutoLogin() {
-    if (typeof localStorage !== 'undefined') {
-      if (localStorage.getItem("usertoken") !== 'undefined') {
-        this.authservice.GetActiveUserInfo()
-      }
-    }
+    this.authservice.GetActiveUserInfo()
   }
 
 }

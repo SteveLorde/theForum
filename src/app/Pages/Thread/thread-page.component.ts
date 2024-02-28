@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Thread} from "../../Data/Models/Thread";
 import {DataService} from "../../Services/DataService/data.service";
 import {NgForOf} from "@angular/common";
@@ -12,6 +12,7 @@ import {Post} from "../../Data/Models/Post";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {FormControl, FormGroup, FormsModule} from "@angular/forms";
 import {AddPost} from "../../Data/Models/AddPost";
+import {QuillViewComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-thread-page',
@@ -21,7 +22,8 @@ import {AddPost} from "../../Data/Models/AddPost";
     PostInputComponent,
     RouterLink,
     FallbackimageDirective,
-    FormsModule
+    FormsModule,
+    QuillViewComponent
   ],
   templateUrl: './thread-page.component.html',
   styleUrl: './thread-page.component.scss'
@@ -33,7 +35,7 @@ export class ThreadPageComponent implements OnInit {
   imgurl = this.dataservice.backendimageurl
 
 
-  constructor(private route : ActivatedRoute, public dataservice : DataService, private authservice : AuthenticationService) {
+  constructor(private router: Router, private route : ActivatedRoute, public dataservice : DataService, public authservice : AuthenticationService) {
   }
 
   ngOnInit() {
@@ -61,7 +63,7 @@ export class ThreadPageComponent implements OnInit {
     }
     else {
       //get post body and create new post
-      let newpost : AddPost = {body: this.postform.controls.postcontent.value, threadid: this.thread.id, userid: this.authservice.activeuser.id}
+      let newpost : AddPost = {body: this.postform.controls.postcontent.value, threadId: this.thread.id, userId: this.authservice.activeuser.id}
       console.log(newpost)
       this.dataservice.AddPost(newpost).subscribe( res => {
           if (res) {
@@ -73,6 +75,17 @@ export class ThreadPageComponent implements OnInit {
         }
       )
     }
+  }
+
+  DeleteThread(){
+    this.dataservice.DeleteThread(this.thread.id).subscribe(res => {
+      if (res) {
+        this.router.navigate(["/subcategory", this.thread.subcategoryid])
+      }
+      else {
+        Swal.fire("Delete Thread FAILED")
+      }
+    })
   }
 
 }

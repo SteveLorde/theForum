@@ -48,6 +48,11 @@ export class ProfilePageComponent implements OnInit {
     })
   }
 
+  Logout() {
+    this.authservice.Logout()
+    this.router.navigate(["/"])
+  }
+
 
 
 }

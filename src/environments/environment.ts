@@ -1,4 +1,4 @@
 export const environment = {
   production : true,
-  backendurl: "myapi.thegenericcompany.xyz"
-};
+  backendurl: "https://myapi.thegenericcompany.xyz"
+}

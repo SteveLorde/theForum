@@ -1,5 +1,5 @@
 export interface AddPost {
-  userid : string
-  threadid : string
+  userId : string
+  threadId : string
   body : string
 }

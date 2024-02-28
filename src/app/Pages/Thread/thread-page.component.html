@@ -1,4 +1,12 @@
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center m-5 bg-gray-800">
+
+  <!---OP Buttons--->
+  <div class="flex flex-row items-center">
+  @if (this.authservice.activeuser.id == this.thread.userowner.id) {
+    <button class="p-2 bg-red-700 text-white" (click)="DeleteThread()">Delete Thread</button>
+  }
+  </div>
+
   <div class="flex flex-col items-center">
     <h3 class="m-2 text-white font-bold text-3xl">{{thread.title}}</h3>
     @for (post of thread.posts; track post.id) {
@@ -8,7 +16,7 @@
           <img class="size-12" src="{{dataservice.backendurl}}/ForumApp/Users/{{post.userposter.id}}/Images/{{post.userposter.profilepicfilename}}" appFallbackimage/>
         </div>
         <div class="p-2">
-          <p class="text-white">{{post.body}}</p>
+          <quill-view>{{post.body}}</quill-view>
         </div>
       </div>
     }

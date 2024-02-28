@@ -1,18 +1,21 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {NotificationsService} from "../../Services/Notifications/notifications.service";
 import {sign} from "node:crypto";
 import {AuthenticationService} from "../../Services/Authentication/authentication.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
-  loginstatus = signal("Login / Register")
+  loginstatus = signal<string>("")
   numofmessages = signal(0)
   messages : MessageEvent[] = []
 
@@ -21,19 +24,13 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-    this.CheckLoginStatus()
-  }
-
-  CheckLoginStatus() {
-    if (this.authservice.activeuser != null) {
-      this.loginstatus.set(`${this.authservice.activeuser.username}`)
-    }
-    else {
-      this.loginstatus.set("Login / Register")
-    }
+    this.authservice.authStatusObservable.subscribe(value => this.loginstatus.set(value))
   }
 
 
+  ToggleMobileMenu() {
+
+  }
 
 
 
