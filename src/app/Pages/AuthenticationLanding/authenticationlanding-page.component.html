@@ -3,20 +3,19 @@
   <div class="formsection">
     <button class="formselection" (click)="SwitchForm()">Go {{status}}</button>
     <form class="form" *ngIf="Loginform" [formGroup]="loginform" (ngSubmit)="Login()">
-      <p class="testheader">this is currently for testing, input any credentials to Login</p>
-      <h3 class="username">Username</h3>
+      <h3 class="formtitle">Username</h3>
       <input class="forminput"  type="text" placeholder="Enter Username" [formControl]="loginform.controls.username" />
-      <h3 class="password">Password</h3>
+      <h3 class="formtitle">Password</h3>
       <input class="forminput" type="text" placeholder="Enter Password" [formControl]="loginform.controls.password" />
       <input class="submit" type="submit" value="Login" />
     </form>
 
     <form class="form" *ngIf="Registerform" [formGroup]="registerform" (ngSubmit)="Register()">
-      <h3 class="username">Username</h3>
+      <h3 class="formtitle">Username</h3>
       <input class="forminput" type="text" placeholder="Enter Username" [formControl]="registerform.controls.username" />
-      <h3 class="username">Password</h3>
+      <h3 class="formtitle">Password</h3>
       <input class="forminput" type="text" placeholder="Enter Password" [formControl]="registerform.controls.password" />
-      <h3 class="username">Email</h3>
+      <h3 class="formtitle">Email</h3>
       <input class="forminput" type="text" placeholder="Enter Email" [formControl]="registerform.controls.email" />
       <input class="submit" type="submit" value="Register" />
     </form>

@@ -13,6 +13,7 @@ export class NotificationsService {
   backendurl = environment.backendurl
   sse : EventSource
   messages : MessageEvent[] = []
+  showNotificationMenu = new BehaviorSubject<boolean>(false)
 
 
   constructor(@Inject(PLATFORM_ID) private platformid : any ) {
