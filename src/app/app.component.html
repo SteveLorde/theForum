@@ -1,5 +1,13 @@
 <div>
+
   <app-navbar></app-navbar>
-  <app-notifications-menu #notifmenu class="NotificationMenu" />
-  <router-outlet></router-outlet>
+  <app-header-ad />
+
+  <div class="flex flex-row">
+    <app-notifications-menu #notifmenu class="NotificationMenu" />
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footbar />
+
 </div>

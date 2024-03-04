@@ -6,11 +6,13 @@ import {PostInputComponent} from "./Components/PostInput/post-input.component";
 import {AuthenticationService} from "./Services/Authentication/authentication.service";
 import {NotificationsMenuComponent} from "./Components/NotificationsMenu/notifications-menu.component";
 import {NotificationsService} from "./Services/Notifications/notifications.service";
+import {HeaderAdComponent} from "./Components/Advertising/HeaderAd/header-ad.component";
+import {FootbarComponent} from "./Components/Footbar/footbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, PostInputComponent, NotificationsMenuComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, PostInputComponent, NotificationsMenuComponent, HeaderAdComponent, FootbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
