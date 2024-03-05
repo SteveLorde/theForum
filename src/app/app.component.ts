@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
   notifComponent : any
 
   constructor(private authservice : AuthenticationService, private notifservice: NotificationsService) {
-    this.notifComponent = document.getElementById("notifmenu")
+    //this.notifComponent = document.getElementById("notifmenu")
   }
   ngOnInit() {
     this.notifservice.showNotificationMenu.subscribe(res => {
