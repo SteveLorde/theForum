@@ -24,6 +24,7 @@ export class AppComponent implements OnInit{
     //this.notifComponent = document.getElementById("notifmenu")
   }
   ngOnInit() {
+    /*
     this.notifservice.showNotificationMenu.subscribe(res => {
       if (res) {
         this.notifComponent.style.display = "block"
@@ -32,6 +33,8 @@ export class AppComponent implements OnInit{
         this.notifComponent.style.display = "none"
       }
     })
+     */
+
     //this.AutoLogin()
   }
 
