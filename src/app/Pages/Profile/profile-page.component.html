@@ -5,7 +5,10 @@
   </div>
 
   <div class="flex flex-col md:flex-row items-center justify-center p-4 gap-9">
-    <img class="w-[100px]" src="" appFallbackimage />
+
+    <img class="w-[100px] hover:bg-gray-400" src="{{dataservice.backendurl}}/storage/ForumApp/Users/{{user.id}}/profileimage.png" appFallbackimage  alt="profileimage"/>
+
+
     <p>{{user.username}}
     <div>
     <p>Number of Posts</p>
