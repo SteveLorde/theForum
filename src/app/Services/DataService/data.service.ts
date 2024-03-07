@@ -33,7 +33,7 @@ export class DataService {
   }
 
   GetCategoryThreads(subcategoryid : string){
-    return this.http.get<SubCategory>(`${this.backendurl}/ForumApp/threads/getsubcategorythreads/${subcategoryid}`)
+    return this.http.get<SubCategory>(`https://myapi.thegenericcompany.xyz/ForumApp/threads/getsubcategorythreads/${subcategoryid}`)
   }
 
   GetThread(threadid : string) {
